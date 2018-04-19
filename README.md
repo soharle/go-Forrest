@@ -1,4 +1,4 @@
 # Go Forrest
 
-Sistema de corridas de rua em Java.
+Sistema controlador de corridas de rua em Java.
 
