@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+    <title>Atleta</title>
+
+</head>
+<body class="bg-dark h-100">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Go-forrest!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'~/'}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'~/atleta'}">Atletas</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Navegar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" th:href="@{'~/administrador/'}">Administrador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/organizador/'}">Organizador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/evento/'}">Evento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/percurso/'}">Percurso</a></br>
+                        <a class="dropdown-item" th:href="@{'~/endereco/'}">Endereço</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pagamento/'}">Pagamento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/lote/'}">Lote</a></br>
+                        <a class="dropdown-item" th:href="@{'~/chip/'}">Chip</a></br>
+                        <a class="dropdown-item" th:href="@{'~/inscricao/'}">Inscrição</a></br>
+                        <a class="dropdown-item" th:href="@{'~/ranking/'}">Ranking</a></br>
+                        <a class="dropdown-item" th:href="@{'~/kit/'}">Kit</a></br>
+                        <a class="dropdown-item" th:href="@{'~/distribuicaodepontos/'}">Distribuição de Pontos</a></br>
+                        <a class="dropdown-item" th:href="@{'~/localderetirada/'}">Local de Retirada</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pontuacao/'}">Pontuacao</a></br>
+
+                    </div>
+                </li>
+            </ul>
+            <h4 class="m-2 my-sm-0" th:text="${session.atleta.nome}" th:if="${session.tipoLogin == 'atleta'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.administrador.login}" th:if="${session.tipoLogin == 'administrador'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.organizador.nome}" th:if="${session.tipoLogin == 'organizador'}"> </h4>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="btn btn-outline-danger my-2 my-sm-0" th:href="@{'~/logout/'}">Logout</a>
+            </form>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <div class="d-flex align-items-center flex-column justify-content-center h-100 bg-dark text-white">
+
+
+        <h1 th:text="${tittle}"> Operação </h1>
+        <form th:object="${atleta}" method="post">
+            <h4 class="mb-4">Dados pessoais</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome">Nome</label>
+                    <input class="form-control" id="nome" th:value="${atleta?.nome}" type="text" name="nome"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="apelido">Apelido</label>
+                    <input class="form-control" id="apelido" th:value="${atleta?.apelido}" type="text" name="apelido"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cpf">CPF</label>
+                    <input class="form-control" id="cpf" th:value="${atleta?.cpf}" type="text" name="cpf"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="rg">RG</label>
+                    <input class="form-control" id="rg" th:value="${atleta?.rg}" type="text" name="rg"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-md-7 mb-3">
+                    <label for="email">Email</label>
+                    <input class="form-control" id="email" th:value="${atleta?.email}" type="email" name="email"
+                           th:disabled="${operacao} == excluir" placeholder="example@example.com"/>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label for="senha">Senha</label>
+                    <input class="form-control" id="senha" th:value="${atleta?.senha}" type="text" name="senha"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="dataNascimento">Data nascimento</label>
+                    <input class="form-control" id="dataNascimento" th:value="${atleta?.dataNascimento}" type="date"
+                           name="dataNascimento"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+            </div>
+            <fieldset class="form-group col-md-4 mb-3" >
+                <legend>Sexo</legend>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="sexo" value="true"
+                               th:checked="${atleta?.sexo}" th:readonly="${operacao} == excluir" > Masculino
+                    </label>
+                </div>
+                <div class="form-check" th:if="${operacao} != adicionar">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="sexo" value="0"
+                               th:checked="!${atleta?.sexo}" th:readonly="${operacao} == excluir" > Feminino
+                    </label>
+                </div>
+                <div class="form-check" th:if="${operacao} == adicionar">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="sexo" value="0"
+                               th:readonly="${operacao} == excluir" > Feminino
+                    </label>
+                </div>
+            </fieldset>
+
+
+
+
+            <h4 class="mb-4">Contato com o atleta</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="telFixo">Telefone Fixo</label>
+                    <input class="form-control" id="telFixo" th:value="${atleta?.telFixo}" type="text" name="telFixo"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="telCel">Telefone Celular</label>
+                    <input class="form-control" id="telCel" th:value="${atleta?.telCel}" type="text" name="telCel"
+                           th:disabled="${operacao} == excluir"/>
+                </div>
+            </div>
+
+            <h4 class="mb-4">Contato de emergencia</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nomemerg">Nome Emergencia</label>
+                    <input class="form-control" id="nomemerg" th:value="${atleta?.nomemerg}" type="text" name="nomemerg"
+                           th:disabled="${operacao} == excluir" aria-describedby="HelpNomeEmergencia"/>
+                    <small id="HelpNomeEmergencia" class="form-text text-muted">Nome da pessoa para contato em caso de
+                        emergencia
+                    </small>
+                </div>
+                <div class="col-md-6 mb-3">
+
+                    <label for="telEmerg">Telefone Emergencia</label>
+                    <input class="form-control" id="telEmerg" th:value="${atleta?.telEmerg}" type="text" name="telEmerg"
+                           th:disabled="${operacao} == excluir" aria-describedby="HelpTelEmergencia"/>
+                    <small id="HelpTelEmergencia" class="form-text text-muted">Telefone da pessoa para contato em caso
+                        de emergencia
+                    </small>
+                </div>
+            </div>
+
+
+            <hr class="mb-4">
+            <input class="btn btn-primary btn-lg btn-block" type="submit" th:value="${botaoOperacao}"/>
+            <a class="btn btn-danger btn-lg btn-block" th:href="@{'~/atleta/'}">Cancelar</a>
+        </form>
+    </div>
+</main>
+
+
+<!-- Carrega mais rapido! -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

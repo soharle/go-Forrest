@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+    <title>Lote</title>
+
+
+</head>
+<body class="bg-dark h-100">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Go-forrest!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'~/'}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'~/lote'}">Lotes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Navegar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" th:href="@{'~/atleta/'}">Atleta</a></br>
+                        <a class="dropdown-item" th:href="@{'~/organizador/'}">Organizador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/evento/'}">Evento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/percurso/'}">Percurso</a></br>
+                        <a class="dropdown-item" th:href="@{'~/endereco/'}">Endereço</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pagamento/'}">Pagamento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/administrador/'}">Administrador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/chip/'}">Chip</a></br>
+                        <a class="dropdown-item" th:href="@{'~/inscricao/'}">Inscrição</a></br>
+                        <a class="dropdown-item" th:href="@{'~/ranking/'}">Ranking</a></br>
+                        <a class="dropdown-item" th:href="@{'~/kit/'}">Kit</a></br>
+                        <a class="dropdown-item" th:href="@{'~/distribuicaodepontos/'}">Distribuição de Pontos</a></br>
+                        <a class="dropdown-item" th:href="@{'~/localderetirada/'}">Local de Retirada</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pontuacao/'}">Pontuacao</a></br>
+
+                    </div>
+                </li>
+            </ul>
+            <h4 class="m-2 my-sm-0" th:text="${session.atleta.nome}" th:if="${session.tipoLogin == 'atleta'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.administrador.login}" th:if="${session.tipoLogin == 'administrador'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.organizador.nome}" th:if="${session.tipoLogin == 'organizador'}"> </h4>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="btn btn-outline-danger my-2 my-sm-0" th:href="@{'~/logout/'}">Logout</a>
+            </form>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <div class="d-flex align-items-center flex-column justify-content-center h-100 bg-dark text-white">
+
+
+        <h1 th:text="${tittle}"> Operação </h1>
+        <form th:object="${lote}" method="post">
+            <div class="row">
+                <label for="dataInicial">Data inicial</label>
+                <input class="form-control" id="dataInicial" th:value="${lote?.dataInicial}" type="date" name="dataInicial"
+                       th:disabled="${operacao} == excluir"/>
+            </div>
+            <div class="row">
+                <label for="dataFinal">Data final</label>
+                <input class="form-control" id="dataFinal" th:value="${lote?.dataFinal}" type="date" name="dataFinal"
+                       th:disabled="${operacao} == excluir"/>
+            </div>
+
+            <div class="row">
+                <label for="evento">Evento</label>
+            <select class="custom-select d-block w-100" th:disabled="${operacao} == excluir" name="evento" id="evento">
+                <option disabled selected value> -- Selecione  -- </option>
+                <option th:if="${lote?.evento} == null" th:each="evento : ${eventos}" th:value="${evento.codEvento}"  th:text="${evento.titulo}"></option>
+                <option th:if="${lote?.evento} != null" th:each="evento : ${eventos}" th:value="${evento.codEvento}" th:selected="${lote.evento.codEvento} == ${evento.codEvento}" th:text="${evento.titulo}"></option>
+            </select>
+            </div>
+
+            <hr class="mb-4">
+            <input class="btn btn-primary btn-lg btn-block" type="submit" th:value="${botaoOperacao}"/>
+            <a class="btn btn-danger btn-lg btn-block" th:href="@{'~/lote/'}">Cancelar</a>
+        </form>
+    </div>
+</main>
+
+
+
+
+<!-- Carrega mais rapido! -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

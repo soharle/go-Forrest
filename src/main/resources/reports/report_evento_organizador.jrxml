@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_evento_organizador" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43498346-2723-4c68-af5b-2f1fffc15d3f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codOrganizador" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     evento.`cod_evento` AS evento_cod_evento,
+     evento.`data_evento` AS evento_data_evento,
+     evento.`duracao` AS evento_duracao,
+     evento.`horalargada` AS evento_horalargada,
+     evento.`link_mapa` AS evento_link_mapa,
+     evento.`local_largada` AS evento_local_largada,
+     evento.`max_participantes` AS evento_max_participantes,
+     evento.`titulo` AS evento_titulo,
+     evento.`endereco_cod_endereco` AS evento_endereco_cod_endereco,
+     evento.`organizador_cod_organizador` AS evento_organizador_cod_organizador,
+     organizador.`cod_usuario` AS organizador_cod_usuario
+FROM
+     `evento` evento,
+     `organizador` organizador
+WHERE
+     organizador.cod_usuario = evento.organizador_cod_organizador and evento.organizador_cod_organizador =$P{codOrganizador}]]>
+	</queryString>
+	<field name="evento_cod_evento" class="java.lang.Long"/>
+	<field name="evento_data_evento" class="java.lang.String"/>
+	<field name="evento_duracao" class="java.lang.String"/>
+	<field name="evento_horalargada" class="java.lang.String"/>
+	<field name="evento_link_mapa" class="java.lang.String"/>
+	<field name="evento_local_largada" class="java.lang.String"/>
+	<field name="evento_max_participantes" class="java.lang.Integer"/>
+	<field name="evento_titulo" class="java.lang.String"/>
+	<field name="evento_endereco_cod_endereco" class="java.lang.Long"/>
+	<field name="evento_organizador_cod_organizador" class="java.lang.Long"/>
+	<field name="organizador_cod_usuario" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="849e07ba-b1b9-430e-a9cb-1d20dba40f33"/>
+				<staticText>
+					<reportElement x="20" y="20" width="411" height="43" forecolor="#FFFFFF" uuid="baaef3d8-4350-4dc0-806d-403f754f3b83"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Eventos por Organizador]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="267" y="63" width="308" height="20" forecolor="#FFFFFF" uuid="5c734292-44aa-4f49-8bb7-1ab0f34db2d8"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatorio de eventos por organizador]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="a4342a00-edc7-4307-9bc7-68f911933dbb"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a9e25184-819f-4d3f-90a9-ceca511c662d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Inscr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="92" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dd644bd2-2180-49e6-9698-0b2833466b8a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="184" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e8c413f3-65ca-4728-90df-b6988892a224"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="276" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c398145a-ee1c-4023-a6be-f63b49dfb19e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora largada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="368" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1dbb1488-9f1f-48e9-a1fc-0856a15264d9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="460" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7081e87d-7ad9-4a0b-807b-26319e4b161c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Max. atletas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="69dc08a3-96a3-4bc0-9628-bd2ae684c3b5"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="92" height="20" uuid="09325f14-d2ea-420d-82b7-5ca9821db93b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_cod_evento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="92" y="0" width="92" height="20" uuid="3d7c2fdc-0ba4-4b45-b994-f1ccd7766c49"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_titulo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="184" y="0" width="92" height="20" uuid="82e354b8-194e-497b-92d3-28973f874179"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_duracao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="276" y="0" width="92" height="20" uuid="4fe6220d-6fad-4c08-9564-0c8b9c9e6fdb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_horalargada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="368" y="0" width="92" height="20" uuid="2705dc84-a3c0-4300-8338-c9b82126ca65"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_data_evento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="460" y="0" width="92" height="20" uuid="58fb2d80-0de5-4cf2-a60d-8a5baf83f876"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_max_participantes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="800a1707-ad43-49c7-a987-ea3f9d3a37ff"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="98bc3f17-0e32-445b-a345-615ae935b7c0"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="3276b88e-1d38-4572-9155-3c786a1f9d16"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+
+    <title>Página de login</title>
+    <style>
+    html,body{
+        width:100%;
+        margin:0;
+        height:100%;
+    }
+
+    </style>
+</head>
+
+<body class="bg-dark h-100">
+
+<main class="container w-100 h-100">
+    <div class="d-flex align-items-center flex-column justify-content-center h-100 bg-dark text-white ">
+        <form class="form-signin" method="post">
+
+
+            <h1 class="text-center">Login</h1>
+            <div class="row">
+                <p th:text="${msg}"></p>
+            </div>
+            <div class="row">
+                <label for="login" class="sr-only">Email address</label>
+                <input type="email" id="login" name="login" class="form-control" placeholder="Email address" required
+                       autofocus>
+            </div>
+            <div class="row">
+                <label for="senha" class="sr-only">Password</label>
+                <input type="password" id="senha" name="senha" class="form-control" placeholder="Password" required>
+            </div><!--
+        <div class="row">
+            <select class="form-control" name="tipoUsuario" id="tipoUsuario">
+                <option value="atleta">Atleta</option>
+                <option value="administrador">Administrador</option>
+                <option value="organizador">Organizador</option>
+            </select>
+        </div>-->
+            <hr class="mb-4">
+
+            <div class="row">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+
+            </div>
+            <hr class="mb-4">
+        </form>
+        <div class="row">
+            <p> Não possui uma conta? crie apertando <a th:href="@{'~/atleta/cadastrar/'}"> aqui</a>
+        </div>
+
+    </div>
+</main>
+
+</body>
+
+</html>

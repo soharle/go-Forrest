@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_evento_atleta" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3b445fa-694a-4b67-9fad-fc6e08435430">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codAtleta" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     inscricao.`cod_inscricao` AS inscricao_cod_inscricao,
+     inscricao.`data_inscricao` AS inscricao_data_inscricao,
+     inscricao.`numero_peito` AS inscricao_numero_peito,
+     inscricao.`preco_total` AS inscricao_preco_total,
+     inscricao.`status_retirada` AS inscricao_status_retirada,
+     inscricao.`tam_camisa` AS inscricao_tam_camisa,
+     inscricao.`atleta_cod_usuario` AS inscricao_atleta_cod_usuario,
+     inscricao.`chip_cod_chip` AS inscricao_chip_cod_chip,
+     inscricao.`kit_cod_kit` AS inscricao_kit_cod_kit,
+     inscricao.`pagamento_cod_pagamento` AS inscricao_pagamento_cod_pagamento,
+     inscricao.`percurso_cod_percurso` AS inscricao_percurso_cod_percurso,
+     atleta.`apelido` AS atleta_apelido,
+     atleta.`nomemerg` AS atleta_nomemerg,
+     atleta.`pace` AS atleta_pace,
+     atleta.`tel_emerg` AS atleta_tel_emerg,
+     atleta.`cod_usuario` AS atleta_cod_usuario,
+     percurso.`cod_percurso` AS percurso_cod_percurso,
+     percurso.`itinerario` AS percurso_itinerario,
+     percurso.`nome` AS percurso_nome,
+     percurso.`quilometragem` AS percurso_quilometragem,
+     percurso.`evento_cod_evento` AS percurso_evento_cod_evento,
+     evento.`cod_evento` AS evento_cod_evento,
+     evento.`data_evento` AS evento_data_evento,
+     evento.`duracao` AS evento_duracao,
+     evento.`horalargada` AS evento_horalargada,
+     evento.`link_mapa` AS evento_link_mapa,
+     evento.`local_largada` AS evento_local_largada,
+     evento.`max_participantes` AS evento_max_participantes,
+     evento.`titulo` AS evento_titulo,
+     evento.`endereco_cod_endereco` AS evento_endereco_cod_endereco,
+     evento.`organizador_cod_organizador` AS evento_organizador_cod_organizador,
+     usuario.`cod_usuario` AS usuario_cod_usuario,
+     usuario.`cpf` AS usuario_cpf,
+     usuario.`data_nascimento` AS usuario_data_nascimento,
+     usuario.`email` AS usuario_email,
+     usuario.`nome` AS usuario_nome,
+     usuario.`rg` AS usuario_rg,
+     usuario.`senha` AS usuario_senha,
+     usuario.`sexo` AS usuario_sexo,
+     usuario.`tel_cel` AS usuario_tel_cel,
+     usuario.`tel_fixo` AS usuario_tel_fixo,
+     usuario.`endereco_cod_endereco` AS usuario_endereco_cod_endereco
+FROM
+     `inscricao` inscricao,
+     `atleta` atleta,
+     `percurso` percurso,
+     `evento` evento,
+     `usuario` usuario
+WHERE
+     atleta.cod_usuario = $P{codAtleta}
+ and atleta.cod_usuario = usuario.cod_usuario
+ AND inscricao.atleta_cod_usuario = atleta.cod_usuario
+ AND inscricao.percurso_cod_percurso = percurso.cod_percurso
+ AND percurso.evento_cod_evento = evento.cod_evento]]>
+	</queryString>
+	<field name="inscricao_cod_inscricao" class="java.lang.Long"/>
+	<field name="inscricao_data_inscricao" class="java.lang.String"/>
+	<field name="inscricao_numero_peito" class="java.lang.Integer"/>
+	<field name="inscricao_preco_total" class="java.lang.Float"/>
+	<field name="inscricao_status_retirada" class="java.lang.Boolean"/>
+	<field name="inscricao_tam_camisa" class="java.lang.String"/>
+	<field name="inscricao_atleta_cod_usuario" class="java.lang.Long"/>
+	<field name="inscricao_chip_cod_chip" class="java.lang.Long"/>
+	<field name="inscricao_kit_cod_kit" class="java.lang.Long"/>
+	<field name="inscricao_pagamento_cod_pagamento" class="java.lang.Long"/>
+	<field name="inscricao_percurso_cod_percurso" class="java.lang.Long"/>
+	<field name="atleta_apelido" class="java.lang.String"/>
+	<field name="atleta_nomemerg" class="java.lang.String"/>
+	<field name="atleta_pace" class="java.lang.Float"/>
+	<field name="atleta_tel_emerg" class="java.lang.String"/>
+	<field name="atleta_cod_usuario" class="java.lang.Long"/>
+	<field name="percurso_cod_percurso" class="java.lang.Long"/>
+	<field name="percurso_itinerario" class="java.lang.String"/>
+	<field name="percurso_nome" class="java.lang.String"/>
+	<field name="percurso_quilometragem" class="java.lang.Float"/>
+	<field name="percurso_evento_cod_evento" class="java.lang.Long"/>
+	<field name="evento_cod_evento" class="java.lang.Long"/>
+	<field name="evento_data_evento" class="java.lang.String"/>
+	<field name="evento_duracao" class="java.lang.String"/>
+	<field name="evento_horalargada" class="java.lang.String"/>
+	<field name="evento_link_mapa" class="java.lang.String"/>
+	<field name="evento_local_largada" class="java.lang.String"/>
+	<field name="evento_max_participantes" class="java.lang.Integer"/>
+	<field name="evento_titulo" class="java.lang.String"/>
+	<field name="evento_endereco_cod_endereco" class="java.lang.Long"/>
+	<field name="evento_organizador_cod_organizador" class="java.lang.Long"/>
+	<field name="usuario_cod_usuario" class="java.lang.Long"/>
+	<field name="usuario_cpf" class="java.lang.String"/>
+	<field name="usuario_data_nascimento" class="java.lang.String"/>
+	<field name="usuario_email" class="java.lang.String"/>
+	<field name="usuario_nome" class="java.lang.String"/>
+	<field name="usuario_rg" class="java.lang.String"/>
+	<field name="usuario_senha" class="java.lang.String"/>
+	<field name="usuario_sexo" class="java.lang.Boolean"/>
+	<field name="usuario_tel_cel" class="java.lang.String"/>
+	<field name="usuario_tel_fixo" class="java.lang.String"/>
+	<field name="usuario_endereco_cod_endereco" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="50c3ee03-f303-4fa3-b1c1-acbbfa9e1ec1"/>
+				<staticText>
+					<reportElement x="20" y="20" width="302" height="43" forecolor="#FFFFFF" uuid="5642f7c3-dff2-469b-b9aa-750bb31bcffc"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Inscricoes por atletas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="336" y="43" width="239" height="20" forecolor="#FFFFFF" uuid="f37cd98d-b10f-48ff-a67d-763f9aacc349"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatorio de inscricoes por atleta]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="834cce49-c9c9-45c8-a6db-59e76afe7a5b"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="cec3c10f-75f2-43c9-8dca-52793e69192d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Ins.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="69" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c51c75c6-0f68-4b98-adfa-4c5f708e9300"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Peito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="39ae0f4b-b995-474c-8ada-c3117b31045c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="207" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b69e4a7a-ece6-4fae-a02e-33397cc9aa05"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Retirada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="276" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="036fdcd5-6e69-4a8a-85f2-e6570bac0d64"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atleta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c5c30001-4249-41fc-85ae-87072a70008f"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f6d3acdb-1067-448e-997f-3142119596ca"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="483" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f6c5423f-944c-4e1d-bd01-825e5eebbec9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Percurso]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="ba38c24d-9226-4587-9fc4-b23ee53a33cf"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="69" height="20" uuid="323f56b9-539b-406f-bad4-e2238476dcd4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inscricao_cod_inscricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="69" y="0" width="69" height="20" uuid="d5a69348-1ed5-430d-8fff-d390f2d21560"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inscricao_numero_peito}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="0" width="69" height="20" uuid="cd9149f6-da93-4577-9761-e1281ab526e7"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inscricao_preco_total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="207" y="0" width="69" height="20" uuid="1e4ca108-a20b-4155-906e-5af1f8023810"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inscricao_status_retirada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="276" y="0" width="69" height="20" uuid="3c793faf-4b8d-4895-bb20-893cf6e610e6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="345" y="0" width="69" height="20" uuid="c1a02095-ed8e-4dfa-8109-03bc9c93e13e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_email}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="414" y="0" width="69" height="20" uuid="1ef0b8ad-fdc0-45ad-8255-dbdeca25289e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{evento_titulo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="483" y="0" width="69" height="20" uuid="34bec3bc-d47a-431e-a11b-33465e8c22b3"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percurso_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="a1aa0463-7882-4602-a6cf-37531f62d2a7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="04a319ef-fc7a-45af-9601-d55c3e4d5389"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="38c091a0-1cc6-4525-951d-d55abb7153ec"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

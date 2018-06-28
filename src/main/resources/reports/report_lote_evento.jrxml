@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_lote_evento" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a110b50-4a61-483a-abde-e4210ee85bf8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codEvento" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     evento.`cod_evento` AS evento_cod_evento,
+     evento.`data_evento` AS evento_data_evento,
+     evento.`duracao` AS evento_duracao,
+     evento.`horalargada` AS evento_horalargada,
+     evento.`link_mapa` AS evento_link_mapa,
+     evento.`local_largada` AS evento_local_largada,
+     evento.`max_participantes` AS evento_max_participantes,
+     evento.`titulo` AS evento_titulo,
+     evento.`endereco_cod_endereco` AS evento_endereco_cod_endereco,
+     evento.`organizador_cod_organizador` AS evento_organizador_cod_organizador,
+     lote.`cod_lote` AS lote_cod_lote,
+     lote.`data_final` AS lote_data_final,
+     lote.`data_inicial` AS lote_data_inicial,
+     lote.`valor` AS lote_valor,
+     lote.`evento_cod_evento` AS lote_evento_cod_evento
+FROM
+     `evento` evento,
+     `lote` lote
+WHERE
+     evento.cod_evento = lote.evento_cod_evento
+and evento.cod_evento=$P{codEvento}]]>
+	</queryString>
+	<field name="evento_cod_evento" class="java.lang.Long"/>
+	<field name="evento_data_evento" class="java.lang.String"/>
+	<field name="evento_duracao" class="java.lang.String"/>
+	<field name="evento_horalargada" class="java.lang.String"/>
+	<field name="evento_link_mapa" class="java.lang.String"/>
+	<field name="evento_local_largada" class="java.lang.String"/>
+	<field name="evento_max_participantes" class="java.lang.Integer"/>
+	<field name="evento_titulo" class="java.lang.String"/>
+	<field name="evento_endereco_cod_endereco" class="java.lang.Long"/>
+	<field name="evento_organizador_cod_organizador" class="java.lang.Long"/>
+	<field name="lote_cod_lote" class="java.lang.Long"/>
+	<field name="lote_data_final" class="java.lang.String"/>
+	<field name="lote_data_inicial" class="java.lang.String"/>
+	<field name="lote_valor" class="java.lang.Float"/>
+	<field name="lote_evento_cod_evento" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="ce047a19-9b42-467d-95b2-f371a352798e"/>
+				<staticText>
+					<reportElement x="20" y="20" width="276" height="43" forecolor="#FFFFFF" uuid="7b427653-d5ab-47f2-9314-29a1549f1759"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Lote por evento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="353" y="43" width="222" height="20" forecolor="#FFFFFF" uuid="e53ae3c3-b08f-4757-bc06-c724fe50f883"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatorio de lotes por evento]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="ba453a92-6306-46e4-af2c-eda83ddcfa7f"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2d31a5d1-6f17-4d9c-8802-9ee451c2d6eb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2add87ff-28be-4d96-994d-4d542bbea8aa"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="276" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e16f3e50-c520-443a-ada4-94a44fc3fb89"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="38a31f5b-8904-42cc-a681-acd78c61a7d4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="54645a87-ee35-44db-bf00-b1f2cdeb6236"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="138" height="20" uuid="0ff4eec4-93a7-42b1-a7ec-432c3bb3ffcf"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote_cod_lote}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="0" width="138" height="20" uuid="5c2f5c07-6697-4fce-bbf6-d13fa6b12dbe"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote_data_inicial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="276" y="0" width="138" height="20" uuid="71d046dd-e040-486c-9aa5-b78b3226fdf3"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote_data_final}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="414" y="0" width="138" height="20" uuid="91f32dca-92ea-4905-b110-cbf98f1ed368"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lote_valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="526f60e2-977c-4e19-bb3f-7aba46101d48"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8995b51f-2f1e-4c7d-a02f-a6f07ca63ff7"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="762ae59f-47b7-40e4-ae8a-180eb9050002"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

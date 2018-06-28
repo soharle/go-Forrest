@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+    <title>Percurso</title>
+
+
+</head>
+<body class="bg-dark h-100">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Go-forrest!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'~/'}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{'~/percurso'}">Percursos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Navegar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" th:href="@{'~/administrador/'}">Administrador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/organizador/'}">Organizador</a></br>
+                        <a class="dropdown-item" th:href="@{'~/evento/'}">Evento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/kit/'}">Kit</a></br>
+                        <a class="dropdown-item" th:href="@{'~/endereco/'}">Endereço</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pagamento/'}">Pagamento</a></br>
+                        <a class="dropdown-item" th:href="@{'~/lote/'}">Lote</a></br>
+                        <a class="dropdown-item" th:href="@{'~/chip/'}">Chip</a></br>
+                        <a class="dropdown-item" th:href="@{'~/inscricao/'}">Inscrição</a></br>
+                        <a class="dropdown-item" th:href="@{'~/ranking/'}">Ranking</a></br>
+                        <a class="dropdown-item" th:href="@{'~/atleta/'}">Atleta</a></br>
+                        <a class="dropdown-item" th:href="@{'~/distribuicaodepontos/'}">Distribuição de Pontos</a></br>
+                        <a class="dropdown-item" th:href="@{'~/localderetirada/'}">Local de Retirada</a></br>
+                        <a class="dropdown-item" th:href="@{'~/pontuacao/'}">Pontuacao</a></br>
+
+                    </div>
+                </li>
+            </ul>
+            <h4 class="m-2 my-sm-0" th:text="${session.atleta.nome}" th:if="${session.tipoLogin == 'atleta'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.administrador.login}" th:if="${session.tipoLogin == 'administrador'}"> </h4>
+            <h4 class="m-2 my-sm-0" th:text="${session.organizador.nome}" th:if="${session.tipoLogin == 'organizador'}"> </h4>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="btn btn-outline-danger my-2 my-sm-0" th:href="@{'~/logout/'}">Logout</a>
+            </form>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <div class="d-flex align-items-center flex-column justify-content-center h-100 bg-dark text-white">
+        <h1>Lista de Percursos</h1>
+        <hr class="mb-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark" th:if="${!percursos.isEmpty()}">
+                <thead class="thead-light">
+                <tr>
+                    <th>Nome</th>
+                    <th class="col-2 text-center">Operação</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="percurso : ${percursos}">
+                    <td th:text="${percurso.nome}">Login</td>
+                    <td class="col-2 text-center">
+                        <a class="btn btn-outline-success" th:href="@{'/percurso/edit/' + ${percurso.codPercurso}}">Editar</a>
+                        <a class="btn btn-outline-warning" th:href="@{'/percurso/delete/' + ${percurso.codPercurso}}">Excluir</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="mb-12">
+        <h2 th:unless="${!percursos.isEmpty()}">Sem Percursos</h2>
+    </div>
+    <div class="d-flex align-items-end  justify-content-end btn-group" >
+        <a class="btn btn-primary " th:href="@{'~/percurso/add/'}">Adicionar</a>
+        <a class="btn btn-warning" th:href="@{'~/'}">Voltar</a>
+
+    </div>
+</main>
+
+</body>
+</html>
